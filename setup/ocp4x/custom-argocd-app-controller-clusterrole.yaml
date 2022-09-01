@@ -256,6 +256,9 @@ rules:
       - operator.ibm.com
     resources:
       - commonservices
+      - operandrequests
+      - operandconfigs
+      - operandregistries
   - verbs:
       - '*'
     apiGroups:
@@ -330,12 +333,6 @@ rules:
       - isc.ibm.com
     resources:
       - cp4sthreatmanagements
-  - verbs:
-      - '*'
-    apiGroups:
-      - operator.ibm.com
-    resources:
-      - operandrequests
   - verbs:
       - '*'
     apiGroups:

@@ -44,6 +44,16 @@ resources:
 #- argocd/operators/ibm-cpd-wml-operator.yaml
 #- argocd/instances/ibm-cpd-wml-instance.yaml
 
+## Cloud Pak for Data 4.5.x
+#- argocd/operators/ibm-cpd-ccs-operand-config.yaml
+#- argocd/operators/ibm-cpd-ccs-operand-registry.yaml
+#- argocd/operators/ibm-cpd-scheduling-operator-new.yaml
+#- argocd/instances/ibm-cpd-scheduling-instance-new.yaml
+#- argocd/operators/ibm-cpd-platform-operator-new.yaml
+#- argocd/instances/ibm-cpd-instance-new.yaml
+#- argocd/operators/ibm-cpd-ds-operator-new.yaml
+#- argocd/instances/ibm-cpd-ds-instance-new.yaml
+
 ## Cloud Pak for Data Demos
 #- argocd/instances/cp4d-pattern-healthcare.yaml
 
@@ -61,6 +71,7 @@ resources:
 
 ## IBM Catalogs
 #- argocd/operators/ibm-catalogs.yaml
+#- argocd/operators/ibm-catalogs-new.yaml
 
 # PAW
 #- argocd/instances/ibm-paw.yaml

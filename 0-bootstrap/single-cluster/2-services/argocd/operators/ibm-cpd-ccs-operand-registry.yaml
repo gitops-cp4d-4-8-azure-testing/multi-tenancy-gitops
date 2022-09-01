@@ -1,0 +1,54 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ibm-cpd-ccs-operand-registry
+  annotations:
+    argocd.argoproj.io/sync-wave: "210"
+  labels:
+    gitops.tier.group: ibm-cloudpak
+    # gitops.tier.layer: services
+    gitops.tier.source: helm
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: ibm-common-services
+    server: 'https://kubernetes.default.svc'
+  project: services
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  source:
+    chart: ibm-operand-registry
+    repoURL: "https://atbijo.github.io/helm-testing/" # Populated by kustomize patches in 2-services/kustomization.yaml
+    targetRevision: 1.0.0
+    helm:
+      values: |
+        metadata:
+          labels:
+            app.kubernetes.io/instance: olm-utils
+            app.kubernetes.io/managed-by: olm-utils
+            app.kubernetes.io/name: olm-utils
+        spec:
+          services:
+            - spec: {}
+      parameters:
+      - name: metadata.name
+        value: ibm-cpd-ccs-registry
+      - name: metadata.labels.release
+        value: 4.5.0
+      - name: spec.operators[0].name
+        value: ibm-cpd-ccs-operator
+      - name: spec.operators[0].namespace
+        value: ibm-common-services
+      - name: spec.operators[0].scope
+        value: public
+      - name: spec.operators[0].packageName
+        value: ibm-cpd-ccs
+      - name: spec.operators[0].sourceNamespace
+        value: openshift-marketplace
+      - name: spec.operators[0].installPlanApproval
+        value: Automatic
+      - name: spec.operators[0].channel
+        value: v2.0
